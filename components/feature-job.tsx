@@ -1,18 +1,15 @@
+import { Job } from "@/types";
+import { Marquee } from "@devnomic/marquee";
+import Link from "next/link";
 import { FC } from "react";
+import { Button } from "./ui/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Button } from "./ui/button";
-import Link from "next/link";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { Marquee } from "@devnomic/marquee";
-import { Job } from "@/types";
 
 interface FeatureJobProps {}
 
@@ -29,9 +26,11 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
   );
   const jobs = await request.json();
   console.log(jobs);
+  const jobsWithImages = jobs.filter((job: Job) => job.image_url);
+
   return (
     <>
-      <div className="text-4xl my-5">Feature Job</div>
+      <div className="text-4xl my-5 mb-10 font-thin">Feature Job</div>
       <div className="max-h-96 overflow-hidden">
         <Marquee
           pauseOnHover={true}
@@ -40,7 +39,7 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
           className="gap-[3rem] [--duration:25s]"
           innerClassName="gap-[3rem] [--gap:3rem]"
         >
-          {jobs.map((job: Job, index: number) => (
+          {jobsWithImages.map((job: Job, index: number) => (
             <Card
               key={index}
               className="w-fill border-secondary mt-3 first:mt-0"
@@ -61,16 +60,15 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
                       {job.location_iso || "Remote"} | {job.job_type}
                     </h1>
                     <h1>
-                      ${job.min_salary_usd} - ${job.max_salary_usd}
+                      {job.min_salary_usd && job.max_salary_usd
+                        ? `$${job.min_salary_usd} - $${job.max_salary_usd}`
+                        : job.min_salary_usd
+                        ? `From $${job.min_salary_usd}`
+                        : job.max_salary_usd
+                        ? `Up to $${job.max_salary_usd}`
+                        : "Salary not provided"}
                     </h1>
                   </CardDescription>
-                  {/* <CardContent className="prose text-muted-foreground line-clamp-2">
-                    <ReactMarkdown
-                      remarkPlugins={[remarkGfm]}
-                      className="prose prose-headings:text-base text-white"
-                      children={job.description}
-                    />
-                  </CardContent> */}
                 </div>
               </CardHeader>
               <CardFooter className="flex justify-end">
