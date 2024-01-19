@@ -26,8 +26,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          {children}
+          <div className="h-full">
+            <Navbar />
+            <main className="py-24 px-[10vw] lg:px-[15vw]">{children}</main>
+            {/* <Footer /> */}
+          </div>
         </ThemeProvider>
       </body>
     </html>
