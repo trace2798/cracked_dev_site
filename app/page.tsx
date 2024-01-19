@@ -12,7 +12,7 @@ export default function Home() {
             remotely
           </span>
         </h1>
-        <div className=" flex">
+        <div className=" flex max-md:flex-col">
           <div className="lg:w-1/2">
             <div className="mt-5 lg:mt-16">
               <h2 className="text-2xl lg:text-5xl font-light dark:text-slate-400">
@@ -38,7 +38,7 @@ export default function Home() {
               </Marquee>
             </div>
           </div>
-          <div className="pl-5 w-full">
+          <div className="pl-5 mt-10 w-fill">
             <FeatureJob />
           </div>
         </div>
