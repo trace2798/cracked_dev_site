@@ -30,7 +30,7 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
 
   return (
     <>
-      <div className="text-4xl my-5 mb-10 font-thin">Featured Job</div>
+      <div className="text-[32px] my-5 mb-10 font-thin">Featured Job</div>
       <div className="max-h-96 overflow-hidden text-center space-y-5">
         <Marquee
           pauseOnHover={true}

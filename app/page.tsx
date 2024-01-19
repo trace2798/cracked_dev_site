@@ -14,14 +14,14 @@ export default function Home() {
         </h1>
         <div className=" flex max-md:flex-col">
           <div className="lg:w-1/2">
-            <div className="mt-5 lg:mt-16">
+            <div className="mt-5 md:mt-16">
               <h2 className="text-2xl lg:text-5xl font-light dark:text-slate-400">
                 Remote coding jobs made easy: connect, apply, and work from
                 anywhere
               </h2>
             </div>
             <div>
-              <h2 className="text-4xl font-thin mt-10 mb-5 lg:mt-24">
+              <h2 className="text-4xl font-thin mt-10 mb-5 md:mt-24">
                 Trusted by the best teams
               </h2>
               <Marquee

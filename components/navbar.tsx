@@ -16,7 +16,7 @@ export const Navbar = () => {
             </Button>
             <ModeToggle />
             <Button size="sm" asChild>
-              <Link href="/sign-up">Post a job</Link>
+              <Link href="/jobs">All Jobs</Link>
             </Button>
           </div>
         </div>
