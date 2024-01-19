@@ -21,7 +21,7 @@ export default function Home() {
               </h2>
             </div>
             <div>
-              <h2 className="text-4xl font-thin mt-10 mb-5">
+              <h2 className="text-4xl font-thin mt-10 mb-5 lg:mt-24">
                 Trusted by the best teams
               </h2>
               <Marquee
