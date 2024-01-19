@@ -60,8 +60,8 @@ export const Footer = () => {
       <div className="md:max-w-screen-2xl mx-auto flex items-center w-full justify-between">
         <Logo />
         <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
-          {socials.map((social) => (
-            <a href={social.link} target="_blank">
+          {socials.map((social, index) => (
+            <a key={index} href={social.link} target="_blank">
               <Button size="sm" variant="ghost">
                 {social.svg}
               </Button>
