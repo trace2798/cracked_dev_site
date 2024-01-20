@@ -9,6 +9,7 @@ import {
 import { Job } from "@/types";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Selector from "@/components/selector/selector";
 
 interface pageProps {}
 
@@ -27,7 +28,7 @@ const page: FC<pageProps> = async ({}) => {
   console.log(jobs);
   return (
     <>
-      <div>Selector</div>
+      <Selector />
       <div>
         {jobs.map((job: Job, index: number) => (
           <Card key={index} className="w-fill border-secondary mt-3 first:mt-0">
