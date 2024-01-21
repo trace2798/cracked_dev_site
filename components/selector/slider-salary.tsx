@@ -28,7 +28,7 @@ export function TemperatureSliderComponent({
   hoverContentProps,
 }: TemperatureSliderProps) {
   const handleMaxSalaryChange = async (value: number[]) => {
-    console.log(value);
+    //console.log(value);
     setSelectedSalary(value[0]);
     setValue("max_salary", value[0]); // Update the temperature property in the form data
   };

@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardDescription,
-    CardFooter,
-    CardHeader,
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import { ArrowBigLeft } from "lucide-react";
 import Link from "next/link";
@@ -29,7 +29,7 @@ const JobIdPage = async ({ params }: JobIdPageProps) => {
     }
   );
   const job = await request.json();
-  console.log(job);
+  //console.log(job);
   return (
     <>
       <Button size="sm" variant="outline" asChild className="mb-5">
@@ -38,12 +38,8 @@ const JobIdPage = async ({ params }: JobIdPageProps) => {
           Back
         </Link>
       </Button>
-      <div className="flex flex-col lg:flex-row justify-between">
-        <div className="prose dark:prose-invert">
-          <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
-            {job[0].description}
-          </Markdown>
-        </div>
+      <div className="flex flex-col">
+     
         <div>
           <Card className="w-fill border-secondary mt-3 first:mt-0 mr-5">
             <CardHeader className="flex items-center">
@@ -115,6 +111,11 @@ const JobIdPage = async ({ params }: JobIdPageProps) => {
               </a>
             </CardFooter>
           </Card>
+        </div>
+        <div className="prose dark:prose-invert">
+          <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>
+            {job[0].description}
+          </Markdown>
         </div>
       </div>
     </>

@@ -16,9 +16,9 @@ export async function getJobs(
         },
       }
     );
-    console.log("2");
+    //console.log("2");
     const jobs = await request.json();
-    console.log(jobs);
+    //console.log(jobs);
     return jobs;
   } catch (e) {
     console.error(e);

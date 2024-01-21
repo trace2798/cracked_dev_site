@@ -83,7 +83,7 @@ const JobsPage: FC<pageProps> = ({}) => {
   });
   const isLoading = form.formState.isSubmitting;
   const fetchJobs = async (values: SelectorFormValues) => {
-    console.log(values.skill_levels);
+    //console.log(values.skill_levels);
     try {
       const response = await updateSelector(
         values.limit,
@@ -107,13 +107,13 @@ const JobsPage: FC<pageProps> = ({}) => {
   };
   // const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
   //   try {
-  //     console.log(values, "VALUES VALUES");
+  //     //console.log(values, "VALUES VALUES");
   //     const response = await updateSelector(
   //       values.limit,
   //       values.job_types,
   //       values.degree_required
   //     );
-  //     console.log(response);
+  //     //console.log(response);
   //     setJobs(response);
   //     // form.reset();
   //   } catch (error) {
@@ -121,7 +121,7 @@ const JobsPage: FC<pageProps> = ({}) => {
   //     toast.error("Something went wrong.");
   //   }
   // };
-  console.log(jobs, "MESSAGES MESSAGES");
+  //console.log(jobs, "MESSAGES MESSAGES");
   return (
     <>
       <div className="w-full">

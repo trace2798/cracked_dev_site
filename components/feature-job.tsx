@@ -27,7 +27,7 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
   );
   // const jobs = await getJobs();
   const jobs = await request.json();
-  console.log(jobs);
+  //console.log(jobs);
   // const jobsWithImages = jobs.filter((job: Job) => job.image_url);
 
   return (

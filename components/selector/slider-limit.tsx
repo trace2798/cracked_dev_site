@@ -27,7 +27,7 @@ export function LimitSliderComponent({
   hoverContentProps,
 }: LimitSliderProps) {
   const handleLimitChange = async (value: number[]) => {
-    console.log(value);
+    //console.log(value);
     setSelectedLimit(value[0]);
     setValue("limit", value[0]); // Update the temperature property in the form data
   };
