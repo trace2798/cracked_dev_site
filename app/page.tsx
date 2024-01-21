@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import FeatureJob from "@/components/feature-job";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";

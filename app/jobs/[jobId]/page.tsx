@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardDescription,
-    CardFooter,
-    CardHeader
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
 } from "@/components/ui/card";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -15,7 +15,7 @@ interface JobIdPageProps {
   };
 }
 
-const BoardIdPage = async ({ params }: JobIdPageProps) => {
+const JobIdPage = async ({ params }: JobIdPageProps) => {
   const request = await fetch(
     `https://api.crackeddevs.com/api/get-jobs?id=${params.jobId}`,
     {
@@ -113,4 +113,4 @@ const BoardIdPage = async ({ params }: JobIdPageProps) => {
   );
 };
 
-export default BoardIdPage;
+export default JobIdPage;
