@@ -245,6 +245,7 @@ const JobsPage: FC<pageProps> = ({}) => {
               type="submit"
               disabled={isLoading}
               size="icon"
+              variant="default"
             >
               Search
             </Button>
