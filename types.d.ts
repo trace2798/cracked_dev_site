@@ -17,11 +17,9 @@ export type Job = {
 };
 
 type SelectorFormValues = {
-  id: string;
   limit: number; // default: 10
   page: number; // default: 1
-  min_salary: number;
-  max_salary: number;
+
   location_iso: string;
   job_types: string;
 

@@ -54,11 +54,8 @@ import { z } from "zod";
 interface pageProps {}
 
 const SelectorFormValues = z.object({
-  id: z.string(),
   limit: z.number(),
   page: z.number(),
-  min_salary: z.number(),
-  max_salary: z.number(),
   location_iso: z.string(),
   job_types: z.string(),
   skill_levels: z
@@ -75,7 +72,6 @@ const JobsPage: FC<pageProps> = ({}) => {
   const form = useForm<z.infer<typeof SelectorFormValues>>({
     resolver: zodResolver(SelectorFormValues),
     defaultValues: {
-      id: "",
       limit: 10, // default: 10
       page: 1, // default: 1
       location_iso: "remote", // default: empty string
@@ -315,7 +311,7 @@ const JobsPage: FC<pageProps> = ({}) => {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Link href={`/jobs/${job.id}`}>
+                <Link href={`/jobs/${job.id}`} prefetch={false}>
                   <Button variant="outline" className="hover:text-green-600">
                     Read More
                   </Button>

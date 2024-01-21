@@ -6,6 +6,7 @@ export async function updateSelector(
   degree_required: boolean,
   skill_levels: string[]
 ) {
+  console.log(limit)
   console.log(job_types);
   console.log(degree_required);
   console.log(skill_levels);
