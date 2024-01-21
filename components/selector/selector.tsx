@@ -15,33 +15,37 @@ import { Heading } from "./heading";
 import { Input } from "../ui/input";
 import { TemperatureSliderComponent } from "./slider-salary";
 import { hoverTemperatureContent } from "./data/temperature";
+import { updateSelector } from "@/actions/selector";
+import { SelectorFormValues } from "@/types";
+import { LimitSliderComponent } from "./slider-limit";
 
-type SelectorFormValues = {
-  limit?: number; // default: 10
-  page?: number; // default: 1
-  min_salary?: number;
-  max_salary?: number;
-  location_iso?: string; // COMING SOON
-  job_type?:
-    | "full_time"
-    | "part_time"
-    | "freelance"
-    | "internship"
-    | "co_founder";
-  skill_levels?: "junior" | "mid" | "senior";
-  degree_required?: boolean;
-  technologies?: string[];
-};
+// type SelectorFormValues = {
+//   limit: number; // default: 10
+//   page: number; // default: 1
+//   min_salary_usd: number;
+//   max_salary_usd: number;
+//   location_iso: string; // COMING SOON
+//   job_type:
+//     | "full_time"
+//     | "part_time"
+//     | "freelance"
+//     | "internship"
+//     | "co_founder";
+//   skill_levels: "junior" | "mid" | "senior";
+//   degree_required: boolean;
+//   technologies: string[];
+// };
 
 const Selector = ({}) => {
   const form = useForm<SelectorFormValues>({
     defaultValues: {
+      id: "",
       limit: 10, // default: 10
       page: 1, // default: 1
-      min_salary: 2000, // default: 0
-      max_salary: 0, // default: 0
+      min_salary: 20000, // default: 0
+      max_salary: 200000, // default: 0
       location_iso: "remote", // default: empty string
-      job_type: "full_time", // default: 'full_time'
+      job_types: "full_time", // default: 'full_time'
       skill_levels: "junior", // default: 'junior'
       degree_required: false, // default: false
       technologies: ["react"],
@@ -53,21 +57,23 @@ const Selector = ({}) => {
   const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
     try {
       console.log(values, "VALUES VALUES");
-      console.log("1")
-      const request = await fetch(
-        `https://api.crackeddevs.com/api/get-jobs?limit=10&min_salary=${values.min_salary}&max_salary=${values.max_salary}&location_iso=${values.location_iso}&job_types=${values.job_type}&skill_levels=${values.skill_levels}&degree_required=${values.degree_required}&technologies=${values.technologies}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "api-key": process.env.CRACKED_DEV_API_KEY || "",
-          },
-        }
-      );
-      console.log('2')
-      const jobs = await request.json();
+      console.log("1");
+      //   const request = await fetch(
+      //     `https://api.crackeddevs.com/api/get-jobs?limit=10&min_salary=${values.min_salary}&max_salary=${values.max_salary}&location_iso=${values.location_iso}&job_types=${values.job_type}&skill_levels=${values.skill_levels}&degree_required=${values.degree_required}&technologies=${values.technologies}`,
+      //     {
+      //       method: "GET",
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         "api-key": process.env.CRACKED_DEV_API_KEY || "",
+      //       },
+      //     }
+      //   );
+      //   console.log('2')
+      //   const jobs = await request.json();
+      console.log(values.max_salary);
+      const jobs = await updateSelector(values.max_salary, values.limit);
       console.log(jobs);
-      form.reset();
+      // form.reset();
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong.");
@@ -123,10 +129,14 @@ const Selector = ({}) => {
                 description="All set to default. Change to experiment."
               />
               <div className="grid w-full p-2 -mt-10 overflow-hidden xl:gap-2 2xl:grid-cols-2">
-                <TemperatureSliderComponent
+                <LimitSliderComponent
                   setValue={form.setValue}
                   hoverContentProps={hoverTemperatureContent}
                 />
+                {/* <TemperatureSliderComponent
+                  setValue={form.setValue}
+                  hoverContentProps={hoverTemperatureContent}
+                /> */}
               </div>
 
               <Button

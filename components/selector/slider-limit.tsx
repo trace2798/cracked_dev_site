@@ -12,7 +12,7 @@ import { HoverContentComponent } from "./hover-content-component";
 import { SelectorFormValues } from "@/types";
 import { updateSelector } from "@/actions/selector";
 
-interface TemperatureSliderProps {
+interface LimitSliderProps {
   setValue: UseFormSetValue<SelectorFormValues>;
   hoverContentProps: {
     type: string;
@@ -23,17 +23,17 @@ interface TemperatureSliderProps {
   };
 }
 
-export function TemperatureSliderComponent({
+export function LimitSliderComponent({
   setValue,
   hoverContentProps,
-}: TemperatureSliderProps) {
-  const handleMaxSalaryChange = async (value: number[]) => {
+}: LimitSliderProps) {
+  const handleLimitChange = async (value: number[]) => {
     console.log(value);
-    setSelectedSalary(value[0]);
-    setValue("max_salary", value[0]); // Update the temperature property in the form data
+    setSelectedLimit(value[0]);
+    setValue("limit", value[0]); // Update the temperature property in the form data
   };
 
-  const [selectedSalary, setSelectedSalary] = useState(10);
+  const [selectedLimit, setSelectedLimit] = useState(10);
 
   return (
     <>
@@ -41,7 +41,7 @@ export function TemperatureSliderComponent({
         <div className="flex justify-between mb-3">
           <HoverCard openDelay={200}>
             <HoverCardTrigger asChild>
-              <Label htmlFor="max_salary">Max Salary</Label>
+              <Label htmlFor="max_salary">Limit</Label>
             </HoverCardTrigger>
             <HoverCardContent
               align="start"
@@ -51,15 +51,15 @@ export function TemperatureSliderComponent({
               <HoverContentComponent {...hoverContentProps} />
             </HoverCardContent>
           </HoverCard>
-          <p className="text-neutral-400">{selectedSalary}</p>
+          <p className="text-neutral-400">{selectedLimit}</p>
         </div>
         <div>
           <Slider
             id="max_salary_usd"
-            max={10}
-            defaultValue={[selectedSalary]}
+            max={30}
+            defaultValue={[selectedLimit]}
             step={1}
-            onValueChange={handleMaxSalaryChange}
+            onValueChange={handleLimitChange}
             className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
             aria-label="Temperature"
           />
