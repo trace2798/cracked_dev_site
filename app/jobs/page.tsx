@@ -1,5 +1,14 @@
 "use client";
-import { FC, useState } from "react";
+import { updateSelector } from "@/actions/selector";
+import {
+  hoverJobTypeContent,
+  job_type,
+} from "@/components/selector/data/job-type";
+import { hoverLimitContent } from "@/components/selector/data/limit";
+import { Heading } from "@/components/selector/heading";
+import { SelectJobType } from "@/components/selector/select-job-type";
+import { LimitSliderComponent } from "@/components/selector/slider-limit";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -7,27 +16,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
 import { Job, SelectorFormValues } from "@/types";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import Selector from "@/components/selector/selector";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { Label } from "@/components/ui/label";
-import { HoverContentComponent } from "@/components/selector/hover-content-component";
-import { Input } from "@/components/ui/input";
-import { Heading } from "@/components/selector/heading";
-import { LimitSliderComponent } from "@/components/selector/slider-limit";
-import { hoverTemperatureContent } from "@/components/selector/data/temperature";
-import { updateSelector } from "@/actions/selector";
-import { SelectJobType } from "@/components/selector/select-job-type";
-import { hoverJobTypeContent, job_type } from "@/components/selector/job-type";
 
 interface pageProps {}
 
@@ -82,7 +75,7 @@ const page: FC<pageProps> = ({}) => {
               />
               <LimitSliderComponent
                 setValue={form.setValue}
-                hoverContentProps={hoverTemperatureContent}
+                hoverContentProps={hoverLimitContent}
               />
             </div>
 

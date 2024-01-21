@@ -14,7 +14,7 @@ import { HoverContentComponent } from "./hover-content-component";
 import { Heading } from "./heading";
 import { Input } from "../ui/input";
 import { TemperatureSliderComponent } from "./slider-salary";
-import { hoverTemperatureContent } from "./data/temperature";
+import { hoverTemperatureContent } from "./data/limit";
 import { updateSelector } from "@/actions/selector";
 import { SelectorFormValues } from "@/types";
 import { LimitSliderComponent } from "./slider-limit";

@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
-import { Slider } from "@/components/ui/slider";
 import {
   HoverCard,
-  HoverCardTrigger,
   HoverCardContent,
+  HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { Slider } from "@/components/ui/slider";
+import { useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
 
 import { Label } from "@/components/ui/label";
-import { HoverContentComponent } from "./hover-content-component";
 import { SelectorFormValues } from "@/types";
-import { updateSelector } from "@/actions/selector";
+import { HoverContentComponent } from "./hover-content-component";
 
 interface LimitSliderProps {
   setValue: UseFormSetValue<SelectorFormValues>;
@@ -41,7 +40,7 @@ export function LimitSliderComponent({
         <div className="flex justify-between mb-3">
           <HoverCard openDelay={200}>
             <HoverCardTrigger asChild>
-              <Label htmlFor="max_salary">Limit</Label>
+              <Label htmlFor="limit">Limit</Label>
             </HoverCardTrigger>
             <HoverCardContent
               align="start"
@@ -55,8 +54,9 @@ export function LimitSliderComponent({
         </div>
         <div>
           <Slider
-            id="max_salary_usd"
+            id="limit"
             max={30}
+            min={1}
             defaultValue={[selectedLimit]}
             step={1}
             onValueChange={handleLimitChange}
