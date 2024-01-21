@@ -1,11 +1,11 @@
 "use server";
 
-export async function updateSelector( limit: number) {
-  // console.log(max_salary);
+export async function updateSelector(limit: number, job_types: string) {
+  console.log(job_types);
   try {
     // Use the id variable
     const request = await fetch(
-      `https://api.crackeddevs.com/api/get-jobs?limit=${limit}&location_iso=US`,
+      `https://api.crackeddevs.com/api/get-jobs?limit=${limit}&job_types=${job_types}`,
       {
         method: "GET",
         headers: {

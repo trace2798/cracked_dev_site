@@ -22,13 +22,14 @@ type SelectorFormValues = {
   min_salary: number;
   max_salary: number;
   location_iso: string;
-  job_types:
-    | "full_time"
-    | "part_time"
-    | "freelance"
-    | "internship"
-    | "co_founder";
+  job_types: string;
+
   skill_levels: "junior" | "mid" | "senior";
   degree_required: boolean;
   technologies: string[];
 };
+
+export interface JobType {
+  id: string;
+  name: string;
+}

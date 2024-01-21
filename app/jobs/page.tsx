@@ -26,6 +26,8 @@ import { Heading } from "@/components/selector/heading";
 import { LimitSliderComponent } from "@/components/selector/slider-limit";
 import { hoverTemperatureContent } from "@/components/selector/data/temperature";
 import { updateSelector } from "@/actions/selector";
+import { SelectJobType } from "@/components/selector/select-job-type";
+import { hoverJobTypeContent, job_type } from "@/components/selector/job-type";
 
 interface pageProps {}
 
@@ -49,8 +51,7 @@ const page: FC<pageProps> = ({}) => {
   const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
     try {
       console.log(values, "VALUES VALUES");
-      const response = await updateSelector(values.limit);
-      // const jobs = await response.json();
+      const response = await updateSelector(values.limit, values.job_types);
       console.log(response);
       setMessages(response);
       // form.reset();
@@ -74,29 +75,11 @@ const page: FC<pageProps> = ({}) => {
               description="All set to default. Change to experiment."
             />
             <div className="grid w-full p-2 -mt-10 overflow-hidden xl:gap-2 2xl:grid-cols-2">
-              {/* <SelectModel
-                models={models}
+              <SelectJobType
+                job_type={job_type}
                 setValue={form.setValue}
-                hoverContentProps={hoverModelContent}
+                hoverContentProps={hoverJobTypeContent}
               />
-              <SelectNumberOfGeneration
-                generation={num_generations}
-                setValue={form.setValue}
-                hoverContentProps={hoverNumGenerationContent}
-              />
-              <TemperatureSliderComponent
-                setValue={form.setValue}
-                hoverContentProps={hoverTemperatureContent}
-              />
-              <MaxTokenSliderComponent
-                setValue={form.setValue}
-                hoverContentProps={hoverMaxTokenContent}
-              />
-              <SelectTruncate
-                truncate={truncate}
-                setValue={form.setValue}
-                hoverContentProps={hoverTruncateContent}
-              /> */}
               <LimitSliderComponent
                 setValue={form.setValue}
                 hoverContentProps={hoverTemperatureContent}
@@ -109,7 +92,7 @@ const page: FC<pageProps> = ({}) => {
               disabled={isLoading}
               size="icon"
             >
-              Generate
+              Search
             </Button>
           </form>
         </Form>
