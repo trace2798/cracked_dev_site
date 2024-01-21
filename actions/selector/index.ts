@@ -3,14 +3,16 @@
 export async function updateSelector(
   limit: number,
   job_types: string,
-  degree_required: boolean
+  degree_required: boolean,
+  skill_levels: string[]
 ) {
   console.log(job_types);
   console.log(degree_required);
+  console.log(skill_levels);
   try {
     // Use the id variable
     const request = await fetch(
-      `https://api.crackeddevs.com/api/get-jobs?limit=${limit}&job_types=${job_types}&degree_required=${degree_required}`,
+      `https://api.crackeddevs.com/api/get-jobs?limit=${limit}&job_types=${job_types}&degree_required=${degree_required}&skill_levels=${skill_levels}`,
       {
         method: "GET",
         headers: {

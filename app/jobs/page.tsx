@@ -7,6 +7,10 @@ import {
   job_type,
 } from "@/components/selector/data/job-type";
 import { hoverLimitContent } from "@/components/selector/data/limit";
+import {
+  hoverSkillLevelContent,
+  skill_level_options,
+} from "@/components/selector/data/skill-level";
 import { Heading } from "@/components/selector/heading";
 import { HoverContentComponent } from "@/components/selector/hover-content-component";
 import { SelectJobType } from "@/components/selector/select-job-type";
@@ -21,7 +25,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import {
   HoverCard,
   HoverCardContent,
@@ -31,7 +44,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Job, SelectorFormValues } from "@/types";
 import { CircleIcon } from "lucide-react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -48,28 +61,51 @@ const page: FC<pageProps> = ({}) => {
       max_salary: 200000, // default: 0
       location_iso: "remote", // default: empty string
       job_types: "full_time,internship,part_time,freelance", // default: 'full_time'
-      skill_levels: "junior", // default: 'junior'
+      skill_levels: ["junior", "mid", "senior"], // default: 'junior'
       degree_required: false, // default: false
       technologies: ["react"],
     },
   });
   const isLoading = form.formState.isSubmitting;
-  const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
+  const fetchJobs = async (values: SelectorFormValues) => {
+    console.log(values.skill_levels);
     try {
-      console.log(values, "VALUES VALUES");
       const response = await updateSelector(
         values.limit,
         values.job_types,
-        values.degree_required
+        values.degree_required,
+        values.skill_levels
       );
-      console.log(response);
       setJobs(response);
-      // form.reset();
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong.");
     }
   };
+
+  useEffect(() => {
+    fetchJobs(form.getValues());
+  }, []);
+
+  const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
+    fetchJobs(values);
+  };
+  // const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
+  //   try {
+  //     console.log(values, "VALUES VALUES");
+  //     const response = await updateSelector(
+  //       values.limit,
+  //       values.job_types,
+  //       values.degree_required
+  //     );
+  //     console.log(response);
+  //     setJobs(response);
+  //     // form.reset();
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Something went wrong.");
+  //   }
+  // };
   console.log(jobs, "MESSAGES MESSAGES");
   return (
     <>
@@ -125,6 +161,65 @@ const page: FC<pageProps> = ({}) => {
                 setValue={form.setValue}
                 hoverContentProps={hoverLimitContent}
               />
+              <FormField
+                control={form.control}
+                name="skill_levels"
+                render={() => (
+                  <FormItem>
+                    <div className="mb-4">
+                      <HoverCard openDelay={200}>
+                        <HoverCardTrigger asChild>
+                          <Label htmlFor="job_types">Skill Level</Label>
+                        </HoverCardTrigger>
+                        <HoverCardContent
+                          align="start"
+                          className="w-[260px] text-sm"
+                          side="left"
+                        >
+                          <HoverContentComponent {...hoverSkillLevelContent} />
+                        </HoverCardContent>
+                      </HoverCard>
+                    </div>
+                    {skill_level_options.map((skillLevel) => (
+                      <FormField
+                        key={skillLevel.id}
+                        control={form.control}
+                        name="skill_levels"
+                        render={({ field }) => {
+                          return (
+                            <FormItem
+                              key={skillLevel.id}
+                              className="flex flex-row items-start space-x-3 space-y-0"
+                            >
+                              <FormControl>
+                                <Checkbox
+                                  checked={field.value?.includes(skillLevel.id)}
+                                  onCheckedChange={(checked) => {
+                                    return checked
+                                      ? field.onChange([
+                                          ...field.value,
+                                          skillLevel.id,
+                                        ])
+                                      : field.onChange(
+                                          field.value?.filter(
+                                            (value) => value !== skillLevel.id
+                                          )
+                                        );
+                                  }}
+                                />
+                              </FormControl>
+                              <FormLabel className="font-normal capitalize">
+                                {skillLevel.label}
+                              </FormLabel>
+                            </FormItem>
+                          );
+                        }}
+                      />
+                    ))}
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             <Button
@@ -147,7 +242,7 @@ const page: FC<pageProps> = ({}) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 space-x-3">
           {jobs.map((job: Job, index: number) => (
             <Card key={index} className="border-secondary mt-3">
-              <CardHeader className="flex items-center">
+              <CardHeader className="flex">
                 <img
                   alt="Company Logo"
                   className="aspect-[1/1] overflow-hidden rounded-full object-contain object-center"
@@ -155,6 +250,7 @@ const page: FC<pageProps> = ({}) => {
                   src={job.image_url}
                   width="50"
                 />
+                <h1>{job.company}</h1>
                 <div className="space-y-1">
                   <CardTitle>{job.title}</CardTitle>
                   <CardDescription className="uppercase">
@@ -176,25 +272,27 @@ const page: FC<pageProps> = ({}) => {
               </CardHeader>
               <CardContent>
                 <div className="flex space-x-4 text-sm text-muted-foreground">
-                  <div className="flex items-center w-1/2">
-                    {job.technologies.map((tech) => (
-                      <Badge key={tech} className="flex items-center mr-2">
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="grid grid-cols-3 items-center">
+                    {job.technologies &&
+                      job.technologies.map((tech) => (
+                        <Badge key={tech} className="flex items-center m-2">
+                          {tech}
+                        </Badge>
+                      ))}
                   </div>
-
-                  {/* <div className="flex items-center">
-                    <StarIcon className="mr-1 h-3 w-3" />
-                    20k
-                  </div>
-                  <div>Updated April 2023</div> */}
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-end">
-                {/* <Link href={job.url} target="_blank"> */}
-                <Button>Apply Now</Button>
-                {/* </Link> */}
+              <CardFooter className="flex justify-between">
+                <a href={job.url} target="_blank">
+                  <Button variant="outline" className="hover:text-green-600">
+                    Read More
+                  </Button>
+                </a>
+                <a href={job.url} target="_blank">
+                  <Button variant="ghost" className="hover:text-blue-600">
+                    Apply Now
+                  </Button>
+                </a>
               </CardFooter>
             </Card>
           ))}

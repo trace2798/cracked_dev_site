@@ -24,7 +24,7 @@ type SelectorFormValues = {
   location_iso: string;
   job_types: string;
 
-  skill_levels: "junior" | "mid" | "senior";
+  skill_levels: string[];
   degree_required: boolean;
   technologies: string[];
 };
