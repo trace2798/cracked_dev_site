@@ -1,5 +1,4 @@
 "use client";
-import * as React from "react";
 import {
   HoverCard,
   HoverCardContent,
@@ -19,8 +18,8 @@ import { useState } from "react";
 
 import { UseFormSetValue } from "react-hook-form";
 
-import { HoverContentComponent } from "./hover-content-component";
 import { JobType, SelectorFormValues } from "@/types";
+import { HoverContentComponent } from "./hover-content-component";
 
 interface SelectJobTypeProps {
   setValue: UseFormSetValue<SelectorFormValues>;
@@ -32,9 +31,11 @@ interface SelectJobTypeProps {
     functionality: string;
     note: string;
   };
+  defaultValue: string;
 }
 
 export function SelectJobType({
+  defaultValue,
   job_type,
   setValue,
   hoverContentProps,
@@ -44,7 +45,7 @@ export function SelectJobType({
     setValue("job_types", value); // Update the format property in the form data
   };
 
-  const [selectedJobType, setSelectedJobType] = useState("full_time");
+  const [selectedJobType, setSelectedJobType] = useState(defaultValue);
 
   return (
     <>
@@ -72,7 +73,11 @@ export function SelectJobType({
               <SelectGroup>
                 <SelectLabel>Select a Job Type</SelectLabel>
                 {job_type.map((job) => (
-                  <SelectItem key={job.id} value={job.name}>
+                  <SelectItem
+                    key={job.id}
+                    value={job.name}
+                    className="capitalize"
+                  >
                     {job.name}
                   </SelectItem>
                 ))}

@@ -33,3 +33,8 @@ export interface JobType {
   id: string;
   name: string;
 }
+
+export interface DegreeRequiredType {
+  id: string;
+  name: string;
+}

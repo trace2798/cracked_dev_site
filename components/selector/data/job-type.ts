@@ -21,4 +21,8 @@ export const job_type: JobType[] = [
     id: "0003",
     name: "internship",
   },
+  {
+    id: "0003",
+    name: "freelance",
+  },
 ];
