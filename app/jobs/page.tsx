@@ -60,7 +60,7 @@ const page: FC<pageProps> = ({}) => {
       min_salary: 20000, // default: 0
       max_salary: 200000, // default: 0
       location_iso: "remote", // default: empty string
-      job_types: "full_time,internship,part_time,freelance", // default: 'full_time'
+      job_types: "full_time,internship,part_time,freelance,co_founder", // default: 'full_time'
       skill_levels: ["junior", "mid", "senior"], // default: 'junior'
       degree_required: false, // default: false
       technologies: ["react"],
@@ -180,42 +180,46 @@ const page: FC<pageProps> = ({}) => {
                         </HoverCardContent>
                       </HoverCard>
                     </div>
-                    {skill_level_options.map((skillLevel) => (
-                      <FormField
-                        key={skillLevel.id}
-                        control={form.control}
-                        name="skill_levels"
-                        render={({ field }) => {
-                          return (
-                            <FormItem
-                              key={skillLevel.id}
-                              className="flex flex-row items-start space-x-3 space-y-0"
-                            >
-                              <FormControl>
-                                <Checkbox
-                                  checked={field.value?.includes(skillLevel.id)}
-                                  onCheckedChange={(checked) => {
-                                    return checked
-                                      ? field.onChange([
-                                          ...field.value,
-                                          skillLevel.id,
-                                        ])
-                                      : field.onChange(
-                                          field.value?.filter(
-                                            (value) => value !== skillLevel.id
-                                          )
-                                        );
-                                  }}
-                                />
-                              </FormControl>
-                              <FormLabel className="font-normal capitalize">
-                                {skillLevel.label}
-                              </FormLabel>
-                            </FormItem>
-                          );
-                        }}
-                      />
-                    ))}
+                    <div className="grid grid-cols-3">
+                      {skill_level_options.map((skillLevel) => (
+                        <FormField
+                          key={skillLevel.id}
+                          control={form.control}
+                          name="skill_levels"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={skillLevel.id}
+                                className="flex flex-row items-start space-x-3 space-y-0"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(
+                                      skillLevel.id
+                                    )}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([
+                                            ...field.value,
+                                            skillLevel.id,
+                                          ])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== skillLevel.id
+                                            )
+                                          );
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal capitalize">
+                                  {skillLevel.label}
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          }}
+                        />
+                      ))}
+                    </div>
                     <FormMessage />
                   </FormItem>
                 )}

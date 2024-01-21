@@ -1,9 +1,9 @@
 export const hoverSkillLevelContent = {
   type: "string[]",
-  defaultValue: "no",
+  defaultValue: "junior, mid, senior",
   options: ["junior", "mid", "senior"],
   functionality: "Skill level required for the job",
-  note: "",
+  note: "All the skill levels are chose by default",
 };
 
 export const skill_level_options = [

@@ -1,9 +1,7 @@
-
 export const hoverDegreeRequiredContent = {
   type: "boolean",
-  defaultValue: "no",
-  options: ["yes", "no"],
+  defaultValue: "false",
+  options: ["false", "true"],
   functionality: "Requirement for a degree.",
   note: "",
 };
-

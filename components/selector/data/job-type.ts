@@ -2,10 +2,10 @@ import { JobType } from "@/types";
 
 export const hoverJobTypeContent = {
   type: "string",
-  defaultValue: "full_time",
-  options: ["full_time", "part_time", "internship"],
+  defaultValue: "full_time,internship,part_time,freelance,co_founder",
+  options: ["full_time", "part_time", "internship", "co_founder", "freelance"],
   functionality: "Type of job you are looking for.",
-  note: "",
+  note: "All are chosen by default",
 };
 
 export const job_type: JobType[] = [
@@ -22,7 +22,11 @@ export const job_type: JobType[] = [
     name: "internship",
   },
   {
-    id: "0003",
+    id: "0004",
     name: "freelance",
+  },
+  {
+    id: "0005",
+    name: "co_founder",
   },
 ];
