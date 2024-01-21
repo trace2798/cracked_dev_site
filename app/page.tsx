@@ -1,7 +1,9 @@
-"use client";
+// "use client";
 import FeatureJob from "@/components/feature-job";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Marquee } from "@devnomic/marquee";
 import "@devnomic/marquee/dist/index.css";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -40,7 +42,9 @@ export default function Home() {
             </div>
           </div>
           <div className="pl-5 mt-10 w-fill">
-            <FeatureJob />
+            <Suspense fallback={<Skeleton />}>
+              <FeatureJob />
+            </Suspense>
           </div>
         </div>
       </div>
