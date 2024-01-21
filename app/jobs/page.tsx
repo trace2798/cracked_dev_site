@@ -109,7 +109,6 @@ const page: FC<pageProps> = ({}) => {
   console.log(jobs, "MESSAGES MESSAGES");
   return (
     <>
-      {/* <Selector /> */}
       <div className="w-full">
         <Form {...form}>
           <form
@@ -165,7 +164,7 @@ const page: FC<pageProps> = ({}) => {
                 control={form.control}
                 name="skill_levels"
                 render={() => (
-                  <FormItem>
+                  <FormItem className=" p-3 m-3 border rounded-lg w-fill dark:border-slate-800">
                     <div className="mb-4">
                       <HoverCard openDelay={200}>
                         <HoverCardTrigger asChild>
