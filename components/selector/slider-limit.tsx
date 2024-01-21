@@ -36,7 +36,7 @@ export function LimitSliderComponent({
 
   return (
     <>
-      <div className="flex flex-col my-5">
+      <div className="p-3 m-3 border rounded-lg w-[250px] md:w-full dark:border-slate-800">
         <div className="flex justify-between mb-3">
           <HoverCard openDelay={200}>
             <HoverCardTrigger asChild>
@@ -61,7 +61,7 @@ export function LimitSliderComponent({
             step={1}
             onValueChange={handleLimitChange}
             className="[&_[role=slider]]:h-4 [&_[role=slider]]:w-4"
-            aria-label="Temperature"
+            aria-label="limit"
           />
         </div>
       </div>

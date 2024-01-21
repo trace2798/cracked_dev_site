@@ -130,7 +130,7 @@ const page: FC<pageProps> = ({}) => {
                 control={form.control}
                 name="degree_required"
                 render={({ field }) => (
-                  <FormItem className="flex justify-between p-3 m-3 border rounded-lg w-fill dark:border-slate-800">
+                  <FormItem className="flex justify-between p-3 m-3 border rounded-lg w-[250px] md:w-full dark:border-slate-800">
                     <div className="flex items-center justify-center w-full">
                       <HoverCard openDelay={200}>
                         <HoverCardTrigger asChild>
@@ -256,7 +256,7 @@ const page: FC<pageProps> = ({}) => {
                 <h1>{job.company}</h1>
                 <div className="space-y-1">
                   <CardTitle>{job.title}</CardTitle>
-                  <CardDescription className="uppercase">
+                  <CardDescription className="capitalize">
                     <h1>
                       {" "}
                       {job.location_iso || "Remote"} | {job.job_type}
