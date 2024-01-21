@@ -1,11 +1,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
+    Card,
+    CardDescription,
+    CardFooter,
+    CardHeader,
 } from "@/components/ui/card";
+import { ArrowBigLeft } from "lucide-react";
+import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -30,6 +32,12 @@ const JobIdPage = async ({ params }: JobIdPageProps) => {
   console.log(job);
   return (
     <>
+      <Button size="sm" variant="outline" asChild className="mb-5">
+        <Link href="/jobs">
+          <ArrowBigLeft />
+          Back
+        </Link>
+      </Button>
       <div className="flex flex-col lg:flex-row justify-between">
         <div className="prose dark:prose-invert">
           <Markdown remarkPlugins={[[remarkGfm, { singleTilde: false }]]}>

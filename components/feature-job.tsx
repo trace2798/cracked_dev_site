@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { getJobs } from "@/actions/jobs";
 
 interface FeatureJobProps {}
 
@@ -24,9 +25,10 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
       },
     }
   );
+  // const jobs = await getJobs();
   const jobs = await request.json();
   console.log(jobs);
-  const jobsWithImages = jobs.filter((job: Job) => job.image_url);
+  // const jobsWithImages = jobs.filter((job: Job) => job.image_url);
 
   return (
     <>
@@ -39,7 +41,7 @@ const FeatureJob: FC<FeatureJobProps> = async ({}) => {
           className="gap-[3rem] [--duration:25s]"
           innerClassName="gap-[3rem] [--gap:3rem]"
         >
-          {jobsWithImages.map((job: Job, index: number) => (
+          {jobs.map((job: Job, index: number) => (
             <Card
               key={index}
               className="w-fill border-secondary mt-3 first:mt-0"
