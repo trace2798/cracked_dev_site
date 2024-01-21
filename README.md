@@ -1,6 +1,6 @@
-# CrackDev Website
+# CrackedDev Website
 
-This is a redesign of the CrackedDev website using Next.js, shadcn/ui and using the cracked dev api for job listing.
+This is a redesign of the [CrackedDev website](https://www.crackeddevs.com/) using Next.js, shadcn/ui and using the cracked dev api for job listing.
 
 ### Prerequisites
 
@@ -9,7 +9,7 @@ This is a redesign of the CrackedDev website using Next.js, shadcn/ui and using 
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/trace2798/cracked_dev_site/.git
+git clone https://github.com/trace2798/cracked_dev_site.git
 ```
 
 ### Install packages
