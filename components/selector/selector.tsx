@@ -71,7 +71,7 @@ const Selector = ({}) => {
       //   console.log('2')
       //   const jobs = await request.json();
       console.log(values.max_salary);
-      const jobs = await updateSelector(values.max_salary, values.limit);
+      const jobs = await updateSelector( values.limit);
       console.log(jobs);
       // form.reset();
     } catch (error) {

@@ -1,7 +1,7 @@
 "use server";
 
-export async function updateSelector(max_salary: number, limit: number) {
-  console.log(max_salary);
+export async function updateSelector( limit: number) {
+  // console.log(max_salary);
   try {
     // Use the id variable
     const request = await fetch(

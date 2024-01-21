@@ -25,11 +25,12 @@ import { Input } from "@/components/ui/input";
 import { Heading } from "@/components/selector/heading";
 import { LimitSliderComponent } from "@/components/selector/slider-limit";
 import { hoverTemperatureContent } from "@/components/selector/data/temperature";
+import { updateSelector } from "@/actions/selector";
 
 interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
-  const [messages, setMessages] = useState<Job[]>([]);
+  const [messages, setMessages] = useState([]);
   const form = useForm<SelectorFormValues>({
     defaultValues: {
       id: "",
@@ -48,25 +49,17 @@ const page: FC<pageProps> = ({}) => {
   const onSubmit: SubmitHandler<SelectorFormValues> = async (values) => {
     try {
       console.log(values, "VALUES VALUES");
-      const response = await fetch(
-        `https://api.crackeddevs.com/api/get-jobs?limit=${values.limit}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "api-key": process.env.CRACKED_DEV_API_KEY || "",
-          },
-        }
-      ); // Call the server-side API route
-      const jobs = await response.json();
-      console.log(jobs);
-      setMessages((current) => [...current, jobs]);
-      form.reset();
+      const response = await updateSelector(values.limit);
+      // const jobs = await response.json();
+      console.log(response);
+      setMessages(response);
+      // form.reset();
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong.");
     }
   };
+  console.log(messages, "MESSAGES MESSAGES");
   return (
     <>
       {/* <Selector /> */}
@@ -76,41 +69,6 @@ const page: FC<pageProps> = ({}) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="flex flex-col w-full grid-cols-12 gap-2 p-4 px-3 border rounded-lg md:px-6 focus-within:shadow-sm"
           >
-            <HoverCard openDelay={200}>
-              <HoverCardTrigger asChild>
-                <Label htmlFor="temperature" className="pl-3 text-left w-fit">
-                  Prompt (required)
-                </Label>
-              </HoverCardTrigger>
-              <HoverCardContent
-                align="start"
-                className="w-[260px] text-sm"
-                side="left"
-              >
-                <HoverContentComponent
-                  type="string"
-                  defaultValue="REQUIRED"
-                  options={["N/A"]}
-                  functionality="Represents the prompt or text to be completed."
-                  note="Trailing whitespaces will be trimmed. If your use case requires trailing whitespaces contact Ivan."
-                />
-              </HoverCardContent>
-            </HoverCard>
-            <FormField
-              name="prompt"
-              render={({ field }) => (
-                <FormItem className="col-span-12 lg:col-span-10">
-                  <FormControl className="p-0 m-0">
-                    <Input
-                      className="pl-3 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent "
-                      disabled={isLoading}
-                      placeholder="Enter a prompt to generate answer"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
             <Heading
               title="Available option"
               description="All set to default. Change to experiment."
