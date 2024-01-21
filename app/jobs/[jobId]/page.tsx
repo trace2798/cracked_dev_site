@@ -1,13 +1,11 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
+    Card,
+    CardDescription,
+    CardFooter,
+    CardHeader
 } from "@/components/ui/card";
-import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 

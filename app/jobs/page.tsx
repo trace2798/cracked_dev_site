@@ -17,7 +17,6 @@ import { SelectJobType } from "@/components/selector/select-job-type";
 import { LimitSliderComponent } from "@/components/selector/slider-limit";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Card,
   CardContent,
@@ -30,7 +29,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,14 +42,14 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Job, SelectorFormValues } from "@/types";
-import { CircleIcon } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import Link from "next/link";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { toast } from "sonner";
+import { z } from "zod";
 
 interface pageProps {}
 
@@ -72,7 +70,7 @@ const SelectorFormValues = z.object({
   technologies: z.array(z.string()),
 });
 
-const page: FC<pageProps> = ({}) => {
+const JobsPage: FC<pageProps> = ({}) => {
   const [jobs, setJobs] = useState([]);
   const form = useForm<z.infer<typeof SelectorFormValues>>({
     resolver: zodResolver(SelectorFormValues),
@@ -336,4 +334,4 @@ const page: FC<pageProps> = ({}) => {
   );
 };
 
-export default page;
+export default JobsPage;
