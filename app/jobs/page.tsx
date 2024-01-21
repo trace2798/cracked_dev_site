@@ -132,7 +132,7 @@ const JobsPage: FC<pageProps> = ({}) => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col w-full grid-cols-12 gap-2 p-4 px-3 border rounded-lg md:px-6 focus-within:shadow-sm"
+            className="flex flex-col w-full grid-cols-12 gap-2 p-4 px-3 border border-muted rounded-lg md:px-6 focus-within:shadow-sm"
           >
             <Heading
               title="Available option"
