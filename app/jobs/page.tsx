@@ -17,6 +17,7 @@ import { SelectJobType } from "@/components/selector/select-job-type";
 import { LimitSliderComponent } from "@/components/selector/slider-limit";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Card,
   CardContent,
@@ -47,21 +48,39 @@ import { CircleIcon } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
+import Link from "next/link";
 
 interface pageProps {}
 
+const SelectorFormValues = z.object({
+  id: z.string(),
+  limit: z.number(),
+  page: z.number(),
+  min_salary: z.number(),
+  max_salary: z.number(),
+  location_iso: z.string(),
+  job_types: z.string(),
+  skill_levels: z
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "You have to select at least one item.",
+    }),
+  degree_required: z.boolean(),
+  technologies: z.array(z.string()),
+});
+
 const page: FC<pageProps> = ({}) => {
   const [jobs, setJobs] = useState([]);
-  const form = useForm<SelectorFormValues>({
+  const form = useForm<z.infer<typeof SelectorFormValues>>({
+    resolver: zodResolver(SelectorFormValues),
     defaultValues: {
       id: "",
       limit: 10, // default: 10
       page: 1, // default: 1
-      min_salary: 20000, // default: 0
-      max_salary: 200000, // default: 0
       location_iso: "remote", // default: empty string
-      job_types: "full_time,internship,part_time,freelance,co_founder", // default: 'full_time'
-      skill_levels: ["junior", "mid", "senior"], // default: 'junior'
+      job_types: "full_time,internship,part_time,freelance,co_founder",
+      skill_levels: ["junior", "mid", "senior"],
       degree_required: false, // default: false
       technologies: ["react"],
     },
@@ -164,7 +183,7 @@ const page: FC<pageProps> = ({}) => {
                 control={form.control}
                 name="skill_levels"
                 render={() => (
-                  <FormItem className=" p-3 m-3 border rounded-lg w-fill dark:border-slate-800">
+                  <FormItem className="p-3 m-3 border rounded-lg w-[250px] md:w-full dark:border-slate-800">
                     <div className="mb-4">
                       <HoverCard openDelay={200}>
                         <HoverCardTrigger asChild>
@@ -179,7 +198,7 @@ const page: FC<pageProps> = ({}) => {
                         </HoverCardContent>
                       </HoverCard>
                     </div>
-                    <div className="grid grid-cols-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3">
                       {skill_level_options.map((skillLevel) => (
                         <FormField
                           key={skillLevel.id}
@@ -189,7 +208,7 @@ const page: FC<pageProps> = ({}) => {
                             return (
                               <FormItem
                                 key={skillLevel.id}
-                                className="flex flex-row items-start space-x-3 space-y-0"
+                                className="flex my-2 md:my-0 flex-row items-start space-x-3 space-y-0"
                               >
                                 <FormControl>
                                   <Checkbox
@@ -219,7 +238,7 @@ const page: FC<pageProps> = ({}) => {
                         />
                       ))}
                     </div>
-                    <FormMessage />
+                    <FormMessage className="text-primary" />
                   </FormItem>
                 )}
               />
@@ -286,11 +305,11 @@ const page: FC<pageProps> = ({}) => {
                 </div>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <a href={job.url} target="_blank">
+                <Link   href={`/jobs/${job.id}`}>
                   <Button variant="outline" className="hover:text-green-600">
                     Read More
                   </Button>
-                </a>
+                </Link>
                 <a href={job.url} target="_blank">
                   <Button variant="ghost" className="hover:text-blue-600">
                     Apply Now

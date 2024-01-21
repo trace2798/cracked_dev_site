@@ -1,4 +1,5 @@
 export type Job = {
+  id: string;
   limit: number; // default: 10
   page: number; // default: 1
   min_salary_usd: number;
