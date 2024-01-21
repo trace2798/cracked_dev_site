@@ -50,6 +50,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import Link from "next/link";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface pageProps {}
 
@@ -289,23 +291,33 @@ const page: FC<pageProps> = ({}) => {
                         ? `Up to $${job.max_salary_usd}`
                         : "Salary not provided"}
                     </h1>
+                    <div className="flex space-x-4 text-sm text-muted-foreground">
+                      <div className="grid grid-cols-3 items-center">
+                        {job.technologies &&
+                          job.technologies.map((tech) => (
+                            <Badge
+                              key={tech}
+                              className="flex items-center first:m-0 m-2"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                      </div>
+                    </div>
                   </CardDescription>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="flex space-x-4 text-sm text-muted-foreground">
-                  <div className="grid grid-cols-3 items-center">
-                    {job.technologies &&
-                      job.technologies.map((tech) => (
-                        <Badge key={tech} className="flex items-center m-2">
-                          {tech}
-                        </Badge>
-                      ))}
-                  </div>
+                <div className="dark:prose-invert line-clamp-2">
+                  <Markdown
+                    remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
+                  >
+                    {job.description}
+                  </Markdown>
                 </div>
               </CardContent>
               <CardFooter className="flex justify-between">
-                <Link   href={`/jobs/${job.id}`}>
+                <Link href={`/jobs/${job.id}`}>
                   <Button variant="outline" className="hover:text-green-600">
                     Read More
                   </Button>
